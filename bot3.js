@@ -16,70 +16,15 @@ const APP_VERSION = "v1.00";
 const SLEEP_TIME = 30000;
 const product = 'BTC-USD';
 
-/*
-async function getProducts() {
-    try {
-        const products = await publicClient.getProducts();
-    } catch (error) {
-        //....
-    }
-  }
-  
-
-publicClient.getProducts((error, response, data) => {
-    if (error) {
-        // handle the error
-    } else {
-        // work with data
-    }
-});
-    
-*/
 const myCallback = (err, response, data) => {
     /* ... */
 };
 
-//Using Promises
-/*
-publicClient
-    .getProducts()
-    .then(data => {
-    // work with data
-    })
-    .catch(error => {
-    // handle the error
-    });
-    */
-
-// TypeError: Cannot read property 'then' of undefined
-/*
-const result = publicClient.getProducts(myCallback);
-
-result.then(() => {
-    //
-}); 
-*/
-//Methods
-// async function historicalRates(){
-//     const results = await publicClient.getProductHistoricalRates(product, {
-//         granuality: 300
-//     })
-//     console.log(results[results.length - 1]);
-// }
-
-// async function getProducts(){
-//     const results = await publicClient.getProducts(product, () =>{
-
-//     });
-//     console.log(results[results.length - 1]);
-// }
-
-async function getProductOrderBook(){
+async function placeholderMethod(){
     await publicClient.getProductOrderBook(
         'ETH-USD',
         { level: 3 },
         (error, response, book) => {
-        console.log('getProductOrderBook response body...', response.body);
         console.log('book ...', book);
 
         if(error){
@@ -106,8 +51,8 @@ console.log("\n\n\n\n                    \"The Revolution Will Be Decentralized\
 
 // console.log("\n\n\n\nConnecting to Coinbase Pro in " + parseInt(SLEEP_TIME/1000) + " seconds ..."); 
 
-getProductOrderBook();
+placeholderMethod();
 
 export default {
-    getProductOrderBook,
+    placeholderMethod,
     };
