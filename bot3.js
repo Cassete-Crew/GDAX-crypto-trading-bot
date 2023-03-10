@@ -79,7 +79,12 @@ async function getProductOrderBook(){
         'ETH-USD',
         { level: 3 },
         (error, response, book) => {
-        console.log('getProductOrderBook ...', response);
+        console.log('getProductOrderBook response body...', response.body);
+        console.log('book ...', book);
+
+        if(error){
+            console.log("There was an error with fetching the data..."+ error)
+        }
         }
     );
 }
