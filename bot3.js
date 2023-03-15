@@ -19,7 +19,6 @@ const APP_VERSION = "v1.00";
 const SLEEP_TIME = 30000;
 const product = 'BTC-USD';
 
-const strategyAppllied = readMt4Template();
 
 const myCallback = (err, response, data) => {
     /* ... */
@@ -70,7 +69,7 @@ const main = async function(){
 
     const now = new Date()
     const yesterday = new Date(now.getTime() - (24 * 60 * 60 * 1e3))
-
+    const strategyAppllied = readMt4Template();
 
     program.version('1.0.0')
     .option('-i, --interval [interval]', 'Interval in seconds for candlestick',
