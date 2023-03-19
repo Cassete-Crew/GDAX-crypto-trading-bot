@@ -16,9 +16,9 @@ const secrete = process.env.TRADING_BOT_SECRET || '';
 const apiUrl = process.env.API_URL || '';
 
 const APP_VERSION = "v1.00";
-const SLEEP_TIME = 30000;
 const product = 'BTC-USD';
-
+const now = new Date().getTime() * 1e3;
+const yesterday = now - (24 * 60 * 60) * 1e3;
 
 const myCallback = (err, response, data) => {
     /* ... */
@@ -33,6 +33,10 @@ const readMt4Template = async() =>{
     // Analyze market conditions by mainly looking for support that has turned to resistance, or that has failed to do so
 
     // A simple algorithm for achieving this is by triggering an event whenever a swing high/low is detected
+}
+
+const scrapeEconomicAnnouncementData = async() =>{
+
 }
  
 const getProductHistoricRates = async () =>{
@@ -51,11 +55,19 @@ function toDate(val) {
   return new Date(val * 1e3)
 }
 
+// program.version('1.0.0')
+// .option('-i, --interval [interval]', 'Interval in seconds for candlestick',
+//         parseInt)
+// .option('-p, --product [product]', 'Product identifier', 'BTC-USD')
+// .option('-s, --start [start]', 'Start time in unix seconds', yesterday)
+// .option('-e, --end [end]', 'End time in unix seconds', now)
+// .parse(process.argv)
+//Configurations
+
 const main = async function(){
-    // program.version('1.0.0')
-    // .option('-i. --interval [interval]', 'Interval in seconds for candlestick',
-    //         parseInt, 300)
-    // .parse(process.argv);
+    const strategyAppllied = readMt4Template();
+    const forexFactoryNewsObserver = scrapeEconomicAnnouncementData();
+    // const {interval, product, start, end } = program;
 
     // program
     // .option('--first')
@@ -65,26 +77,15 @@ const main = async function(){
     
     // const options = program.opts();
     // const limit = options.first ? 1 : undefined;
-    // console.log('program.args[0] ... '+program.args[0]);
-
-    const now = new Date()
-    const yesterday = new Date(now.getTime() - (24 * 60 * 60 * 1e3))
-    const strategyAppllied = readMt4Template();
+    // console.log('program.args[0] is ... '+program.args[0]);
 
     program.version('1.0.0')
     .option('-i, --interval [interval]', 'Interval in seconds for candlestick',
             parseInt)
     .option('-p, --product [product]', 'Product identifier', 'BTC-USD')
-    .option('-s, --start [start]', 'Start time in unix seconds',
-            toDate, yesterday)
-
-    .option('-e, --end [end]', 'End time in unix seconds', toDate, now)
-    .option('-t, --strategy [strategy]', 'Strategy Type')
-    .option('-r, --type [type]', 'Run type')
-    .option('-f, --funds [funds]', 'Amount of money to use', parseInt)
-    .option('-l, --live', 'Run live')
+    .option('-s, --start [start]', 'Start time in unix seconds', yesterday)
+    .option('-e, --end [end]', 'End time in unix seconds', now)
     .parse(process.argv)
-        //Configurations
 
     console.log("\n");
     console.log("          __________  ___   _  __    ______               ___");
@@ -103,10 +104,16 @@ const main = async function(){
 
     // console.log("\n\n\n\nConnecting to Coinbase Pro in " + parseInt(SLEEP_TIME/1000) + " seconds ..."); 
 
-    getProductHistoricRates();
-    // console.log("program.interval is... "+program.interval);
-    // console.log("process.argv is... "+process.argv);
-    // console.log(program.args[0].split(options.separator, limit));
+    // getProductHistoricRates();
+
+    const {interval, product, start, end } = program;
+    console.log(interval);
+    console.log(product);
+    console.log(start);
+    console.log(end);
+
+    console.log('program.args[0] ois ... '+program.args[0]);
+
 
 }
 
